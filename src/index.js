@@ -19,7 +19,11 @@ app.post('/analyze', upload.single('file'), (req, res) => {
   
   fs.createReadStream(path)
   .pipe(parser())
-  .on('data', chunck => rows.push(chunck));
+  .on('data', chunck => rows.push(chunck))
+  .on('end', () => {
+    fs.unlink(path, (err) => { if (err) console.log(err) });
+    res.status(200).json({ message: `File processed with success. It were processed ${rows.length} records.` })
+  });
 });
 
 app.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
