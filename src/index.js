@@ -10,4 +10,11 @@ app.use(cors());
 
 const upload = multer({ dest: 'files' });
 
+app.post('/analyze', upload.single('file'), (req, res) => {
+
+  const { path } = req['file'];
+  
+  fs.createReadStream(path);
+});
+
 app.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
