@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const parser = require('csv-parser');
 const multer = require('multer');
 
 const PORT = 8000;
@@ -14,7 +16,8 @@ app.post('/analyze', upload.single('file'), (req, res) => {
 
   const { path } = req['file'];
   
-  fs.createReadStream(path);
+  fs.createReadStream(path)
+  .pipe(parser());
 });
 
 app.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
