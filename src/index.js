@@ -15,9 +15,11 @@ const upload = multer({ dest: 'files' });
 app.post('/analyze', upload.single('file'), (req, res) => {
 
   const { path } = req['file'];
+  const rows = [];
   
   fs.createReadStream(path)
-  .pipe(parser());
+  .pipe(parser())
+  .on('data', chunck => rows.push(chunck));
 });
 
 app.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
