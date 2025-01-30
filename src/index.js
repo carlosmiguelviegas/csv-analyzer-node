@@ -23,6 +23,9 @@ app.post('/analyze', upload.single('file'), (req, res) => {
   .on('end', () => {
     fs.unlink(path, (err) => { if (err) console.log(err) });
     res.status(200).json({ message: `File processed with success. It were processed ${rows.length} records.` })
+  })
+  .on('error', (err) => {
+    if (err) res.status(500).json({ message: `File processed with success. It were processed ${rows.length} records.` })
   });
 });
 
