@@ -29,4 +29,10 @@ app.post('/analyze', upload.single('file'), (req, res) => {
   });
 });
 
+app.post('/signingin', (req, res) => {
+
+  const { email, password } = req['body'];
+  
+});
+
 app.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
