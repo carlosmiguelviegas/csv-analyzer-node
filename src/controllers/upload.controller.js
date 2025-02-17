@@ -1,3 +1,7 @@
+const fs = require('fs');
+
+const parser = require('csv-parser');
+
 const analyze = async(req, res) => {
   
   const { path } = req['file'];
