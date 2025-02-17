@@ -1,10 +1,9 @@
-const express = require('express');
-const cors = require('cors');
+const http = require('http');
 
 const PORT = 8000;
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+const app = require('./app');
 
-app.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
+const server = http.createServer(app);
+
+server.listen(PORT, () => console.log(`server connected on port ${PORT} and listening to requests...`));
